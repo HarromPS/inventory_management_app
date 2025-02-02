@@ -70,3 +70,42 @@ corepack enable pnpm
 # Verify pnpm version:
 pnpm -v
 ```
+- creating react app with typescript template 
+    ```shell
+    pnpm create vite frontend --template react-ts
+    cd frontend
+    pnpm install
+    ```
+
+- install dependencies
+    ```shell
+    pnpm add axios react-router-dom @tanstack/react-query zustand
+    pnpm add -D tailwindcss postcss autoprefixer eslint prettier
+    ```
+
+- configure tailwindcss for styling
+    ```shell
+    pnpm tailwindcss init -p
+    ```
+
+- update tailwind.config.ts
+    ```shell
+    export default {
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    theme: { extend: {} },
+    plugins: [],
+    };
+    ```
+
+- update index.css
+    ```shell
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+    ```
+
+- run app 
+    ```shell
+    pnpm run dev
+    ```
+---
