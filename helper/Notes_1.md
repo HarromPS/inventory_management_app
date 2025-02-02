@@ -31,6 +31,7 @@
     - install django rest framework for web apis 
     ```shell
     pip install djangorestframework django-cors-headers django-environ djangorestframework-simplejwt
+    pip intall python-dotenv
     pip freeze > requirements.txt   # save dependencies
     ```
 
@@ -112,6 +113,7 @@ frontend/
 ## **📌 Backend (Django + Django REST Framework)**
 ```
 backend/
+│── __init__.py
 │── manage.py
 │── .env                # Environment variables (e.g., secret keys, DB credentials)
 │── requirements.txt    # Python dependencies
@@ -233,10 +235,10 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
 
     # Your apps
-    "users",
-    "inventory",
-    "dashboard",
-    "settings",
+    "apps.users",   # apps/users
+    "apps.inventory",   # apps/inventory
+    "apps.dashboard",   # apps/dashboard
+    "apps.roles_settings",  # apps/roles_settings
 ]
 ```
 
@@ -272,6 +274,52 @@ REST_FRAMEWORK = {
 ```
 
 ---
+
+Since `settings.py` is inside the `config` folder, Django needs to know where to find it. 
+
+---
+#### Solutions list: 
+
+### **1️⃣ Set `DJANGO_SETTINGS_MODULE` Environment Variable**
+Run this in your terminal before running Django commands:
+```sh
+export DJANGO_SETTINGS_MODULE=config.settings  # For Linux/macOS
+set DJANGO_SETTINGS_MODULE=config.settings    # For Windows (Command Prompt)
+$env:DJANGO_SETTINGS_MODULE="config.settings" # For Windows (PowerShell)
+```
+
+Or add it permanently to your virtual environment's `activate` script.
+
+---
+
+### **2️⃣ Run Commands with Explicit Settings**
+If you are running a Django command, specify the settings module explicitly:
+```sh
+python manage.py runserver --settings=config.settings
+```
+
+---
+
+### **3️⃣ Update `wsgi.py` & `asgi.py`**
+Inside `config/wsgi.py` and `config/asgi.py`, update:
+```python
+import os
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+```
+
+---
+
+### **4️⃣ Check `__init__.py` in `config/`**
+Ensure there is an empty `__init__.py` file inside `config/` to make it a package.
+
+---
+
+After this, try running:
+```sh
+python manage.py runserver
+```
+
 
 ### **4️⃣ Apply Migrations & Create Superuser**
 ```sh
