@@ -40,7 +40,7 @@
     django-admin startproject config . # start a project name config folder (.) else it will create another folder config under config folder 
 
     mkdir apps && cd apps
-    
+
     django-admin startapp users     # create app as resuable components
     python manage.py startapp users # django-admin and python manage.py both are same commands
     python manage.py startapp inventory
@@ -152,33 +152,42 @@ frontend/
 ## **📌 Backend (Django + Django REST Framework)**
 ```
 backend/
-│── __init__.py
-│── manage.py
+│── __init__.py         # every app have this file for it to be recognized by Python as a package
+│── manage.py   
 │── .env                # Environment variables (e.g., secret keys, DB credentials)
 │── requirements.txt    # Python dependencies
 │── config/             # Django project settings
+├── __init__.py
 │   ├── settings.py
 │   ├── urls.py
 │   ├── wsgi.py
 │   ├── asgi.py
 │── apps/               # All Django apps
+│   ├── __init__.py
 │   ├── users/          # Authentication & role management
 │   │   ├── models.py   # User model with roles
 │   │   ├── serializers.py
-│   │   ├── views.py
-│   │   ├── urls.py
+│   │   ├── views.py    # api endpoints
+│   │   ├── urls.py     # router paths
 │   │   ├── permissions.py
 │   │   ├── otp.py      # OTP logic (email & mobile)
 │   ├── inventory/      # Scrap management
+│   │   ├── __init__.py
 │   │   ├── models.py   # Scrap, Purchase, Sales, Recycle models
 │   │   ├── serializers.py
 │   │   ├── views.py
 │   │   ├── urls.py
 │   │   ├── filters.py  # Filtering logic
 │   ├── dashboard/      # Role-based dashboards
+│   │   ├── __init__.py
 │   │   ├── views.py
 │   │   ├── urls.py
 │   ├── settings/       # Settings for all roles
+│   │   ├── __init__.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   ├── home/       # dsefault home page
+│   │   ├── __init__.py
 │   │   ├── views.py
 │   │   ├── urls.py
 │── static/             # Static files (if needed)

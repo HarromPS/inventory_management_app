@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os 
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()  # loads the configs from .env
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +29,7 @@ SECRET_KEY = 'django-insecure-eg_#)zn3)12wbvaalbtq1r0m5mu+q^(&&mziif+6t2)@lpp8#b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["localhost","127.0.0.1","0.0.0.0"]
 
 # Application definition
 
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
 
     # Your apps
+    "apps.home",    # apps/home
     "apps.users",   # apps/users
     "apps.inventory",   # apps/inventory
     "apps.dashboard",   # apps/dashboard
@@ -66,6 +70,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # React frontend
     "http://127.0.0.1:5173",
+    # str(os.getenv('REACT_APP_URL')) # hosted react app
 ]
 
 REST_FRAMEWORK = {
