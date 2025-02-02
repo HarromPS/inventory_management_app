@@ -39,6 +39,7 @@
     ```shell
     django-admin startproject config . # start a project name config folder (.) else it will create another folder config under config folder 
 
+    mkdir apps && cd apps
     
     django-admin startapp users     # create app as resuable components
     python manage.py startapp users # django-admin and python manage.py both are same commands
